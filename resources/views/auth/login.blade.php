@@ -27,13 +27,13 @@ background-position: center center;
             <div class="collapse navbar-collapse justify-content-end">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a href="../dashboard.html" class="nav-link">
+                        <a href="{{ route('login') }}" class="nav-link active">
                             <i class="material-icons">fingerprint</i>
                            Sign In
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="../pages/register.html" class="nav-link active"><i class="material-icons" aria-hidden="true">person_add</i>
+                        <a href="{{ route('register') }}" class="nav-link"><i class="material-icons" aria-hidden="true">person_add</i>
                             Register
                         </a>
                     </li>
@@ -53,33 +53,33 @@ background-position: center center;
         <div class="card-body">
                 
                 <div class="social-line text-center">
-                    <a href="login/facebook" class="btn-social btn-outline-facebook btn-social-circle waves-effect waves-light m-1">
+                    <a href="{{route('login')}}/f+acebook" class="btn-social btn-outline-facebook btn-social-circle waves-effect waves-light m-1">
                         <i class="fab fa-facebook-f"></i>
                     </a>
-                    <a href="login/google" class="btn-social btn-outline-google btn-social-circle waves-effect waves-light m-1"><i
+                    <a href="{{route('login')}}/google" class="btn-social btn-outline-google btn-social-circle waves-effect waves-light m-1"><i
                             class="fab fa-google-plus-g"></i></a>
-                    <a href="login/instagram" class="btn-social btn-outline-instagram waves-effect btn-social-circle waves-light m-1"><i
+                    <a href="{{route('login')}}//instagram" class="btn-social btn-outline-instagram waves-effect btn-social-circle waves-light m-1"><i
                             class="fab fa-instagram"></i></a>
                 
                 
                 </div>
                 
-                <p class="text-muted text-center mt-2">Or Be Classical</p>
+                <p class="text-muted text-center my-2">Or Be Classical</p>
         
-          <form action="">
+          <form method="POST" action="{{ route('login') }}">
+    @csrf
     
     
     
-    
-            <div class="inputWithIcon mt-4">
-            <input type="email" class="form-control" placeholder="Enter Email-Adress" aria-label="email" id="email"
-                aria-describedby="basic-addon1" required />
+            <div class="inputWithIcon my-2">
+            <input type="email" name="email" @error('email') is-invalid @enderror class="form-control" value="{{ old('email') }}" placeholder="{{ __('Enter E-mail Address') }}" aria-label="email" id="email"
+                aria-describedby="basic-addon1" autocomplete="on" required />
             <i class="material-icons">email</i>
         </div>
         
-        <div class="inputWithIcon inputWithAction mt-4">
-            <input type="password" class="form-control" placeholder="Enter Password" aria-label="Password" id="password"
-                aria-describedby="basic-addon1" required/>
+        <div class="inputWithIcon inputWithAction my-2">
+            <input type="password" name="password" @error('password') is-invalid @enderror class="form-control" value="{{ old('password') }}" placeholder="{{ __('Enter Password') }}" aria-label="Password" id="password"
+                aria-describedby="basic-addon1" autocomplete="off" required/>
             <i class="material-icons">fingerprint</i>
             <i class="fa fa-eye-slash action" id="eye"></i>
         </div>
@@ -89,28 +89,33 @@ background-position: center center;
     
     
       
-             <div class="form-check mt-2">
+<div class="d-flex flex-column-reverse flex-lg-row justify-content-lg-between my-2">
+<div class="form-check">
                  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
                  <label class="form-check-label" for="flexCheckChecked">
                    Remember me 
                  </label>
              </div>
-    
+
+<div>
+<a href="{{ route('password.request') }}" class="text-form"> {{ __('Forgot Your Password?') }}</a>
+</div>
+</div>
          
          
         
         
         
         
-          <div class="form-group mt-2">
+          <div class="form-group my-2">
             <button class="btn btn-block btn-primary" type="submit">Register</button>
           </div> <!-- form-group// -->
         
     
             </form>
         
-            <div class="my-2">
-                <a href="http://localhost/l7ecom/login" class="float-left text-dark"> All ready have an ID Login ?</a>
+            <div class="py-1">
+                <a href="{{route('register')}}" class="text-dark"> All ready have an ID Login ?</a>
               </div>
             
         </div>
@@ -141,11 +146,10 @@ background-position: center center;
       });
       @endif
 
-
-      $(function() {
-      $(".card").fadeIn(3000);
-});
-
+/*  hide & fadeIn login card  */ 
+$('.card').hide();
+$('.card').fadeIn(3000);      
+   
 
 
 const visibilityBtn = document.querySelector("#eye");

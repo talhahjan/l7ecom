@@ -47,9 +47,9 @@
 
 
  <!-- Option 1: Bootstrap Bundle with Popper.js -->
- <script src="http://localhost/l7ecom/assets/js/bootstrap/bootstrap.bundle.js" crossorigin="anonymous"></script>
+ <script src="{{asset('assets/js/bootstrap/bootstrap.bundle.js')}}" crossorigin="anonymous"></script>
 <!-- Jquery js file -->
-<script src="http://localhost/l7ecom/assets/js/jquery/jquery-3.5.1.min.js"></script>
+<script src="{{asset('assets/js/jquery/jquery-3.5.1.min.js')}}" crossorigin="anonymous"></script>
 <!-- jQuery Plugins OwlCarousel  -->
 <script src="http://localhost/l7ecom/assets/js/jquery/plugins/owl.carousel.js"></script>
   @yield('jScript')
