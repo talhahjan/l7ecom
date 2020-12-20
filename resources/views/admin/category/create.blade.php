@@ -74,7 +74,6 @@
                     <label>Parent Category</label>
                     <select name="parent_id" id="parent_id" class="form-control">
                       <option value="0">Top Level</option>
-
                     </select>
                   </div>
 

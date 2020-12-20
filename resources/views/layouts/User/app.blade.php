@@ -57,33 +57,66 @@
 
                 <div class="login">
           
-                  <p class="text-muted mb-2 float-center">Welcome To T.J Shoes</p>
+                  <p class="text-muted mx-2 float-center">Welcome To T.J Shoes</p>
           
-                  <button type="button" class="btn btn-primary btn-sm btn-block">Sign In</button>
-                  <br />
+@guest
+<button type="button" class="btn btn-primary btn-sm btn-block my-2">Sign In</button>
+              
           
-                  <p class="text-muted text-center">Use Social Accounts</p>
-          
+              <p class="text-muted text-center">Use Social Accounts</p>
+      
 <div class="social-line text-center">
-  <a href="login/facebook" class="btn-social btn-outline-facebook btn-social-circle waves-effect waves-light m-1">
-    <i class="fab fa-facebook-f"></i>
-  </a>
-  <a href="login/google" class="btn-social btn-outline-google btn-social-circle waves-effect waves-light m-1"><i
-      class="fab fa-google-plus-g"></i></a>
-  <a href="login/instagram" class="btn-social btn-outline-instagram waves-effect btn-social-circle waves-light m-1"><i
-      class="fab fa-instagram"></i></a>
+<a href="login/facebook" class="btn-social btn-outline-facebook btn-social-circle waves-effect waves-light m-1">
+<i class="fab fa-facebook-f"></i>
+</a>
+<a href="login/google" class="btn-social btn-outline-google btn-social-circle waves-effect waves-light m-1"><i
+  class="fab fa-google-plus-g"></i></a>
+<a href="login/instagram" class="btn-social btn-outline-instagram waves-effect btn-social-circle waves-light m-1"><i
+  class="fab fa-instagram"></i></a>
 
 
 </div>
 
-                    <br />
-          
-                  <p class="text-muted mb-2 text-left">New customer ?</p>
-          
-                  <button type="button" class="btn btn-primary btn-sm btn-block">Register </button>
-          
-          
-          
+      
+              <p class="text-muted my-2 text-left">New customer ?</p>
+      
+              <button type="button" class="btn btn-primary btn-sm btn-block">Register </button>
+      
+      
+
+@endguest
+
+
+
+
+@auth
+
+<div class="d-flex my-2">
+
+<div class="avatar">
+<img src="{{ Auth::user()->profile->avatar ? asset(Auth::user()->profile->avatar) : asset('assets/admin_img/user2-160x160.jpg') }}" alt="profile Pic" class="rounded-circle img-thumbnai" style="height: 50px; width:50x; margin-right: 10px">
+</div>
+
+<div class="align-self-center">
+<h6>{{Auth::user()->profile->first_name .' ' .Auth::user()->profile->last_name}}</h6>
+</div>
+
+</div>
+
+<div class="d-flex justify-content-around my-2">
+<button type="button" class="btn btn-outline-primary btn-sm">Edit Profile</button>
+<button type="button" class="btn btn-outline-primary btn-sm">Sign Out</button>
+
+</div>
+
+
+@endauth
+
+
+
+
+
+
                 </div>
           
                 <div class="dropdown-divider"></div>
@@ -133,9 +166,11 @@
 
 <div class="container departments">
 <div class="content-wrapper">
-  <div><a href="#">Man</a></div>
-  <div><a href="#">Women</a></div>
-  <div><a href="#">Kids</a></div>
+@foreach($sections as $section)
+<div><a href="#">{{$section->title}}</a></div>
+@endforeach
+
+
   <div class="underbar"></div>
 </div>
 </div>

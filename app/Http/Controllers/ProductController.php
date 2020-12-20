@@ -39,7 +39,6 @@ class ProductController extends Controller
     {
         $sections = Section::select('id', 'title')->get();
         $brands = Brand::select('id', 'title')->get();
-
         return view('admin.product.create', compact('sections', 'brands'));
     }
 

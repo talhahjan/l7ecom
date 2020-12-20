@@ -445,111 +445,32 @@
 
     }
 
+    let requestURL = '{{route('admin.ajax.categoryJsonData')}}';
+  let request = new XMLHttpRequest();
+  request.open('GET', requestURL);
+  request.responseType = 'text';
+  request.send();
 
-
-    const Data = [{
-        id: 1,
-        title: 'Electronic Items',
-        isSelectable: false,
-        subs: [{
-            id: 1,
-            title: 'Mobiles & Tablets',
-            isSelectable: false,
-            subs: [{
-                id: 2,
-                title: 'Smart phones',
-            }, {
-                id: 3,
-                title: 'Tablets',
-            }, {
-                id: 4,
-                title: 'Accesories',
-            }, {
-                id: 15,
-                title: 'zzzxzxzxzxzx',
-            }, ],
-        }, ],
-    }, {
-        id: 2,
-        title: 'Fashion',
-        isSelectable: false,
-        subs: [{
-            id: 5,
-            title: 'Foot Wear',
-            isSelectable: false,
-            subs: [{
-                id: 6,
-                title: 'Men Footwear',
-            }, {
-                id: 7,
-                title: 'Women Footwear',
-            }, {
-                id: 8,
-                title: 'Kids Footwear',
-            }, ],
-        }, {
-            id: 9,
-            title: 'Cosmetic & Beauty',
-            isSelectable: false,
-            subs: [{
-                id: 6,
-                title: 'Men Footwear',
-            }, {
-                id: 7,
-                title: 'Women Footwear',
-            }, {
-                id: 8,
-                title: 'Kids Footwear',
-            }, ],
-        }, ],
-    }, {
-        id: 3,
-        title: 'General Store',
-        isSelectable: false,
-        subs: [{
-            id: 10,
-            title: 'Foods',
-            isSelectable: false,
-            subs: [{
-                id: 11,
-                title: 'Spices',
-            }, {
-                id: 12,
-                title: 'Pickles',
-            }, ],
-        }, ],
-    }, {
-        id: 4,
-        title: 'Health care',
-        isSelectable: false,
-        subs: [{
-            id: 13,
-            title: 'Medicines & Surgical',
-            isSelectable: false,
-            subs: [],
-        }, {
-            id: 14,
-            title: 'Fitness Equipment',
-            isSelectable: false,
-            subs: [],
-        }, ],
-    }, ];
-
-
+  request.onload = function() {
+    const DataText = request.response; // get the string from the response
+    const DataJson = JSON.parse(DataText); // convert it to an object
     comboTree = $('#category').comboTree({
-        source: Data,
-        isMultiple: true,
-
+      source: DataJson,
+      cascadeSelect: false,
+      isMultiple: true,
+      collapse: true,
+      selectableLastNode: true,
     });
 
     comboTree.onChange(function() {
-        // strore slected ids of categories it will generate array 
-        let SelectedIds = comboTree.getSelectedIds();
-        // convert array to string
-        let categories = SelectedIds.toString();
-        // store selected categories ids in hidden input values (ID categories)  namely categories
-        $('#categories').attr("value", SelectedIds);
+      // strore slected ids of categories it will generate array 
+      const SelectedIds = comboTree.getSelectedIds();
+      // store selected categories ids in hidden input values (ID categories)  namely categories
+      $('#categories').attr("value", SelectedIds);
     });
+
+  }
+
 </script>
 
 

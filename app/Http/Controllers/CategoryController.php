@@ -36,7 +36,7 @@ class CategoryController extends Controller
     public function create()
     {
 
-
+       
 
         $sections = Section::select('id', 'title')->get();
         $brands = Brand::select('id', 'title')->get();
@@ -51,11 +51,14 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+
+
         $validatedData = $request->validate([
             'title' => 'required|max:255',
             'image' => 'file|mimes:jpg,png,bmp,jpeg',
             'discount' => 'numeric',
-            'parent_id' => 'numeric'
+             'parent_id' => 'required|numeric',
+            'section_id' => 'required|numeric'
         ]);
 
        

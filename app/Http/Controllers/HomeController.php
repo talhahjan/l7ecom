@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Section;
+use App\Product;
+use App\Brand;
 
 class HomeController extends Controller
 {
@@ -23,11 +26,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (auth()->check())
-            $User = auth()->user();
-        else
-            $User = false;
+        $sections = Section::all();
+        $featured=Product::where('featured', 1)
+        ->orderBy('title')
+        ->take(10)
+        ->get();
 
-        return view('home')->with('User', $User);
+
+        return view('home', compact('sections','featured'));
     }
 }
